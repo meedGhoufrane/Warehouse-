@@ -1,4 +1,4 @@
 // app/(tabs)/index.tsx
-import LoginScreen from "./LoginScreen";
+import LoginScreen from "../(auth)/LoginScreen";
 
 export default LoginScreen;

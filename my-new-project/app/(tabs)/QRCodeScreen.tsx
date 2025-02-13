@@ -1,11 +1,11 @@
-// app/(tabs)/HomeScreen.tsx
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const HomeScreen = () => {
+const QRCodeScreen = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Bienvenue sur l'écran d'accueil !</Text>
+            <Text style={styles.title}>QR Code Screen</Text>
+            {/* You can add your QR code generation/display logic here */}
         </View>
     );
 };
@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        color: "#333",
     },
 });
 
-export default HomeScreen;
+export default QRCodeScreen;

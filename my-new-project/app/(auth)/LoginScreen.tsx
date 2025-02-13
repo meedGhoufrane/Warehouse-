@@ -13,7 +13,7 @@ const LoginScreen = () => {
         
         if (isValidKey) {
             Alert.alert("Connexion réussie", "Bienvenue !");
-            router.push("/(tabs)/HomeScreen"); 
+            router.push("../(home)/HomeScreen"); 
         } else {
             Alert.alert("Erreur", "Code secret incorrect");
         }
