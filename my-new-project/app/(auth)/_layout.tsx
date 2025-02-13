@@ -1,11 +1,10 @@
 import React from "react";
 import { Stack } from "expo-router";
-import { StyleSheet, View, Text } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 
-const TabsLayout = () => {
+const AuthLayout = () => {
     return (
-        <ThemedView style={styles.container}>
+        <ThemedView style={{ flex: 1 }}>
             <Stack>
                 <Stack.Screen
                     name="(auth)/LoginScreen"
@@ -15,20 +14,9 @@ const TabsLayout = () => {
                     name="(home)/HomeScreen"
                     options={{ headerShown: false }}
                 />
-                {/* <Stack.Screen
-                    name="(tabs)/QRCodeScreen"
-                    options={{ headerShown: false }}
-                /> */}
             </Stack>
         </ThemedView>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#f8f9fa",
-    },
-});
-
-export default TabsLayout;
+export default AuthLayout; 
