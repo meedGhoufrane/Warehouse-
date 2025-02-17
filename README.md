@@ -1,6 +1,6 @@
-# My New Project
-
-Welcome to My New Project! This is an Expo application designed for product management, including features for adding, editing, and viewing products.
+# My Project Warehouse
+ 
+Welcome to My New Project Warehouse! This is an Expo application designed for product management, including features for adding, editing, and viewing products.
 
 ## Table of Contents
 
