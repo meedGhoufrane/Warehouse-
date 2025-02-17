@@ -38,6 +38,11 @@ const App = () => {
           component={EditProductScreen}
           options={{ title: "Edit Product" }}
         />
+        <Stack.Screen
+          name="QRCode"
+          component={QRCodeScreen}
+          options={{ title: "QR Code Scanner" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
