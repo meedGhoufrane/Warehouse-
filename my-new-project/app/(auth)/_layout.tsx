@@ -5,7 +5,7 @@ import { ThemedView } from "@/components/ThemedView";
 const AuthLayout = () => {
     return (
         <ThemedView style={{ flex: 1 }}>
-            <Stack>
+            <Stack >
                 <Stack.Screen
                     name="(auth)/LoginScreen"
                     options={{ headerShown: false }}

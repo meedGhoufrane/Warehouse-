@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./app/(auth)/LoginScreen";
 import HomeScreen from "./app/(home)/HomeScreen";
-import ProductManagementScreen from "./app/(product)/ProductManagementScreen"; // Add this line
-import SingleProductScreen from "./app/(product)/SingleProductScreen";
+import ProductManagementScreen from "./app/(product)/ProductManagementScreen";
+import SingleProductScreen from "./app/(product)/SingleProductScreen"; // Ensure this import is correct
 import EditProductScreen from "./app/(product)/EditProductScreen";
 
 const Stack = createNativeStackNavigator();
@@ -24,24 +24,13 @@ const App = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ProductManagement" // Add this route
+          name="ProductManagement"
           component={ProductManagementScreen}
-          options={{ title: "Manage Products" }}
         />
         <Stack.Screen
-          name="SingleProduct"
+          name="SingleProduct" // Ensure the route name matches exactly
           component={SingleProductScreen}
-          options={{ title: "Product Details" }}
-        />
-        <Stack.Screen
-          name="EditProduct"
-          component={EditProductScreen}
-          options={{ title: "Edit Product" }}
-        />
-        <Stack.Screen
-          name="QRCode"
-          component={QRCodeScreen}
-          options={{ title: "QR Code Scanner" }}
+          options={{ title: "Product Details" }} // Optional: Customize the title
         />
       </Stack.Navigator>
     </NavigationContainer>

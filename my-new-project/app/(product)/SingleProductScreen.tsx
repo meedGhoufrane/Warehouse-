@@ -13,6 +13,8 @@ const SingleProductScreen = ({ route, navigation }) => {
   const { product } = route.params; // Get the product passed from the previous screen
   const [loading, setLoading] = useState(false);
 
+  console.log("SingleProductScreen rendered with product:", product); // Debugging log
+
   const handleDelete = async () => {
     setLoading(true);
     try {
@@ -113,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SingleProductScreen; 
+export default SingleProductScreen;

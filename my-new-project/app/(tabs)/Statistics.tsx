@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView, Modal, TextInput, Button, Alert, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView, Alert, TouchableOpacity } from "react-native";
 import axios from "axios";
 import * as Print from 'expo-print';
-import * as FileSystem from 'expo-file-system';
 
 const Statistics = () => {
     const [totalProducts, setTotalProducts] = useState(0);
@@ -12,32 +11,48 @@ const Statistics = () => {
     const [recentlyAdded, setRecentlyAdded] = useState([]);
     const [recentlyRemoved, setRecentlyRemoved] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [newProduct, setNewProduct] = useState({
-        name: "",
-        type: "",
-        barcode: "",
-        price: "",
-        supplier: "",
-    });
 
     useEffect(() => {
         const fetchStatistics = async () => {
             try {
                 const response = await axios.get("http://192.168.1.109:3001/products");
-                const products = response.data;
+                const products = response.data.map(product => ({
+                    ...product,
+                    stocks: product.stocks || [], 
+                    city: product.city || 'Unknown', 
+                    createdAt: product.createdAt || new Date().toISOString() 
+                }));
 
                 setTotalProducts(products.length);
-                setTotalCities(new Set(products.map(product => product.city)).size);
-                const outOfStock = products.filter(product => product.stocks.length === 0);
+                
+                const cities = new Set(products.map(product => product.city).filter(Boolean));
+                setTotalCities(cities.size);
+                
+                const outOfStock = products.filter(product => {
+                    const stocks = product.stocks || [];
+                    return stocks.length === 0;
+                });
                 setOutOfStockProducts(outOfStock.length);
-                setTotalInventoryValue(products.reduce((acc, product) => acc + product.price, 0));
+                
+                const totalValue = products.reduce((acc, product) => {
+                    const price = parseFloat(product.price) || 0;
+                    return acc + price;
+                }, 0);
+                setTotalInventoryValue(totalValue);
 
-                const sortedProducts = products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                const sortedProducts = products.sort((a, b) => {
+                    const dateA = new Date(a.createdAt || 0);
+                    const dateB = new Date(b.createdAt || 0);
+                    return dateB - dateA;
+                });
                 setRecentlyAdded(sortedProducts.slice(0, 5));
-                setRecentlyRemoved([]); // Implement logic for removed products if available
+                setRecentlyRemoved([]);
             } catch (error) {
                 console.error("Error fetching statistics:", error);
+                Alert.alert(
+                    "Error",
+                    "Failed to fetch statistics. Please check your connection and try again."
+                );
             } finally {
                 setLoading(false);
             }
@@ -69,7 +84,7 @@ const Statistics = () => {
           <h2>Recently Added Products</h2>
           <ul>
             ${recentlyAdded.map(product => `
-              <li>${product.name} - Added on: ${new Date(product.createdAt).toLocaleDateString()}</li>
+              <li>${product.name || 'Unnamed Product'} - Added on: ${new Date(product.createdAt || new Date()).toLocaleDateString()}</li>
             `).join('')}
           </ul>
         </body>
@@ -77,12 +92,11 @@ const Statistics = () => {
     `;
 
         try {
-            // Generate the PDF and print it
             await Print.printAsync({ html });
-            Alert.alert('PDF Printed', 'The PDF has been sent to the printer.');
+            Alert.alert('Success', 'The PDF has been generated successfully.');
         } catch (error) {
             console.error("Error generating PDF:", error);
-            Alert.alert("Error", "Failed to generate PDF. Please check the console for more details.");
+            Alert.alert("Error", "Failed to generate PDF. Please try again.");
         }
     };
 
@@ -119,30 +133,6 @@ const Statistics = () => {
             <TouchableOpacity style={styles.pdfButton} onPress={generatePDF}>
                 <Text style={styles.pdfButtonText}>Generate PDF</Text>
             </TouchableOpacity>
-
-            <Text style={styles.title}>Recently Added Products</Text>
-            <View style={styles.recentProductsContainer}>
-                {recentlyAdded.map(product => (
-                    <View key={product.id} style={styles.recentProductCard}>
-                        <Text style={styles.recentProductName}>{product.name}</Text>
-                        <Text style={styles.recentProductDate}>Added on: {new Date(product.createdAt).toLocaleDateString()}</Text>
-                    </View>
-                ))}
-            </View>
-
-            <Text style={styles.title}>Recently Removed Products</Text>
-            <View style={styles.recentProductsContainer}>
-                {recentlyRemoved.length > 0 ? (
-                    recentlyRemoved.map(product => (
-                        <View key={product.id} style={styles.recentProductCard}>
-                            <Text style={styles.recentProductName}>{product.name}</Text>
-                            <Text style={styles.recentProductDate}>Removed on: {new Date(product.removedAt).toLocaleDateString()}</Text>
-                        </View>
-                    ))
-                ) : (
-                    <Text style={styles.noProductsText}>No recently removed products.</Text>
-                )}
-            </View>
         </ScrollView>
     );
 };

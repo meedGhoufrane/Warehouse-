@@ -144,6 +144,23 @@
         }
       ],
       "editedBy": []
+    },
+    {
+      "id": 1740028213843,
+      "name": "Gahha",
+      "type": "Bahha",
+      "barcode": "1236543210984",
+      "price": 84554,
+      "supplier": "Bahha"
+    },
+    {
+      "id": 1740029698153,
+      "name": "Gshha",
+      "type": "Bahaha",
+      "barcode": "1236543210979",
+      "price": 845484,
+      "supplier": "Bahaha",
+      "stocks": []
     }
   ],
   "warehousemans": [

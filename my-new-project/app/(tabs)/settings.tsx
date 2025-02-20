@@ -1,4 +1,3 @@
-// app/(tabs)/settings.tsx
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Switch, TouchableOpacity, Alert } from "react-native";
 

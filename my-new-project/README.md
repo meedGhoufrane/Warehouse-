@@ -1,50 +1,87 @@
-# Welcome to your Expo app 👋
+# My New Project
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to My New Project! This is an Expo application designed for product management, including features for adding, editing, and viewing products.
 
-## Get started
+## Table of Contents
 
-1. Install dependencies
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Running the Application](#running-the-application)
+- [API](#api)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- Manage products (add, edit, delete)
+- Search and filter products
+- Sort products by name, price, and stock status
+- QR code scanning for product addition
+- View product statistics
+
+## Technologies Used
+
+- React Native
+- Expo
+- Axios for API requests
+- React Navigation for navigation
+- JSON Server for mock API
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js (version 14 or later)
+- npm or yarn
+- Expo CLI
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/my-new-project.git
+   cd my-new-project
+   ```
+
+2. Install the dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Set up the JSON server:
+
+   - Create a `database.json` file in the root directory with the initial data structure.
+   - You can use the provided `database.json` in the project for initial data.
+
+## Running the Application
+
+1. Start the JSON server:
 
    ```bash
-    npx expo start
+   npm run start:db
    ```
 
-In the output, you'll find options to open the app in a
+2. Start the Expo application:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   npm start
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+3. Follow the instructions in the terminal to open the app in an Android emulator, iOS simulator, or on your physical device using the Expo Go app.
 
-## Get a fresh project
+## API
 
-When you're ready, run:
+The application uses a JSON server running on `http://192.168.1.109:3001/products`. Make sure to adjust the IP address if necessary, depending on your network configuration.
 
-```bash
-npm run reset-project
-```
+## Contributing
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
 
-## Learn more
+## License
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
